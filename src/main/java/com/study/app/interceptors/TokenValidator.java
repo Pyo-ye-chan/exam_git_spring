@@ -20,9 +20,12 @@ public class TokenValidator implements HandlerInterceptor {
 			throws Exception {
 		
 		
-		
 		if(request.getMethod().equalsIgnoreCase("OPTIONS")) {
 			response.setStatus(HttpServletResponse.SC_OK);
+			return true;
+		}
+		
+		if(request.getRequestURI().equals("/members") &&  request.getMethod().equalsIgnoreCase("POST") ) {
 			return true;
 		}
 		
@@ -42,27 +45,27 @@ public class TokenValidator implements HandlerInterceptor {
 //			}
 //		
 //		
-//		String authHeader = request.getHeader("Authorization");
-//		System.out.println("authHeader: " + authHeader);
-//		
-//		
-//		
-//		if(authHeader != null && authHeader.startsWith("Bearer ")) {
-//			String token = authHeader.substring(7);
-//
-//			System.out.println("token: " + token);
-//			
-//			
-//			try {
-//				String id = jwt.getSubject(token);
-//				request.setAttribute("id", id);
-//				return true;
-//				
-//			}catch(Exception e) {
-//				e.printStackTrace();
-//			}
-//			
-//		}
+		String authHeader = request.getHeader("Authorization");
+		System.out.println("authHeader: " + authHeader);
+		
+		
+		
+		if(authHeader != null && authHeader.startsWith("Bearer ")) {
+			String token = authHeader.substring(7);
+
+			System.out.println("token: " + token);
+			
+			
+			try {
+				String id = jwt.getSubject(token);
+				request.setAttribute("loginId", id);
+				return true;
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 		
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		return false; // 토큰이 애초에 없거나 Bearer로 시작하지 않는다면
