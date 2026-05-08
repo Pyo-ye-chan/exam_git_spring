@@ -10,6 +10,8 @@ import com.study.app.interceptors.TokenValidator;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer{
 	
+
+	
 	@Autowired
 	private TokenValidator testInterceptor;
 	
@@ -17,10 +19,15 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(testInterceptor)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/auth/login");
-		
+		.excludePathPatterns(
+				"/auth/login",
+				"/member",
+                "/board",
+                "/board/**",
+                "/**/board/**");
 		
 	}
+	
 
 
 }

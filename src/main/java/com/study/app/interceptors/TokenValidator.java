@@ -26,6 +26,21 @@ public class TokenValidator implements HandlerInterceptor {
 			return true;
 		}
 		
+	    // 로그인 구현 전: 게시판 GET 요청 허용
+	    if (request.getRequestURI().startsWith("/board")
+	            && request.getMethod().equalsIgnoreCase("GET")) {
+	        return true;
+	    }
+
+	    String authHeader = request.getHeader("Authorization");
+
+	    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+	        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+	        return false;
+	    }
+
+	    return true;
+		
 //		if(request.getRequestURI().equals("/signup/idcheck")) {
 //		    return true;
 //		}
@@ -63,8 +78,6 @@ public class TokenValidator implements HandlerInterceptor {
 //			}
 //			
 //		}
-		
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		return false; // 토큰이 애초에 없거나 Bearer로 시작하지 않는다면
+
 	}
 }
