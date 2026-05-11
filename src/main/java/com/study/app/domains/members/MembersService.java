@@ -16,6 +16,9 @@ public class MembersService {
     public int signup(MembersDTO dto) {
         return membersDAO.signup(dto);
     }
+    public MembersDTO getMember (String id) {
+    		return membersDAO.getMember(id);
+    }
 
     
     
