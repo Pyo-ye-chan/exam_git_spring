@@ -3,7 +3,12 @@ package com.study.app.domains.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/board/list")
@@ -13,9 +18,25 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping
-    public ResponseEntity<List<BoardDTO>> list() {
-    	List<BoardDTO> list = boardService.getBoardList();
-        return ResponseEntity.ok(list);
+    public ResponseEntity<Map<String, Object>>  list(Long cpage) {
+    	
+		int totalCount = boardService.totalCount();
+		
+		System.out.println(cpage);
+		
+		Long startNum = cpage*10-9;
+		Long endNum = cpage*10;
+
+		
+		List<BoardDTO> list = boardService.getBoardList(startNum, endNum);
+		
+		Map<String, Object> resp = new HashMap<>();
+		
+		resp.put("list", list);
+		resp.put("totalCount", totalCount);
+		
+		return ResponseEntity.ok(resp);
+		
     }
 
     @GetMapping("/{seq}")

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BoardDAO {
@@ -14,8 +16,15 @@ public class BoardDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public List<BoardDTO> selectAll() {
-		return mybatis.selectList("Board.selectAll");
+	public List<BoardDTO> selectAll(Long startNum, Long endNum) {
+		Map<String, Long> resp = new HashMap<>();
+		resp.put("startNum", startNum);
+		resp.put("endNum", endNum);
+		return mybatis.selectList("Board.selectAll", resp);
+	}
+	
+	public int selectCount() {
+		return mybatis.selectOne("Board.selectCount");
 	}
 
 	@Transactional

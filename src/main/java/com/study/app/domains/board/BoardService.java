@@ -13,9 +13,13 @@ public class BoardService {
     private BoardDAO boardDAO;
 
 
-    public List<BoardDTO> getBoardList() {
-        return boardDAO.selectAll();
+    public List<BoardDTO> getBoardList(Long startNum, Long endNum) {
+        return boardDAO.selectAll(startNum, endNum);
     }
+    
+	public int totalCount() {
+		return boardDAO.selectCount();
+	}
 
     @Transactional
     public BoardDTO getBoard(String seq) {
