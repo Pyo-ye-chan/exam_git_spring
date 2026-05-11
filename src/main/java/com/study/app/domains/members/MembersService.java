@@ -20,6 +20,11 @@ public class MembersService {
     		return membersDAO.getMember(id);
     }
 
-    
-    
+    public int deleteMember(String id) {
+        return membersDAO.deleteMember(id);
+    }
+
+    public int updateMember(MembersDTO dto) {
+        return membersDAO.updateMember(dto);
+    }
 }
