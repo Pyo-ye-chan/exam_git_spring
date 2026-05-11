@@ -21,13 +21,20 @@ public class MembersController {
 		boolean isAvailable = membersService.idCk(id); 
 		return ResponseEntity.ok(isAvailable);
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<MembersDTO> getMember(@PathVariable("id") String id){
+		
+		MembersDTO dto = membersService.getMember(id);
+		return ResponseEntity.ok(dto);
+	}
 
 	@PostMapping
 	public ResponseEntity<Integer> signup(@RequestBody MembersDTO dto) {
 		// 회원가입 로직 (추후 Service와 Repository를 연동하여 구현)
-		System.out.println("도착");
-		System.out.println(dto.getId()+":"+dto.getPw()+":"+dto.getName()+":"+dto.getEmail()+":"+dto.getZipcode()
-		+":"+dto.getAddress1()+":"+dto.getAddress2());
+		//System.out.println("도착");
+		//System.out.println(dto.getId()+":"+dto.getPw()+":"+dto.getName()+":"+dto.getEmail()+":"+dto.getZipcode()
+		//+":"+dto.getAddress1()+":"+dto.getAddress2());
 		int result = membersService.signup(dto);
 		return ResponseEntity.ok(result);
 	}
