@@ -9,26 +9,26 @@ import java.util.List;
 @RequestMapping("/reply")
 public class ReplyController {
 
-    @Autowired
-    private ReplyService service;
+	@Autowired
+	private ReplyService service;
 
-    @PostMapping
-    public int insert(@RequestBody ReplyDTO dto) {
-        return service.insert(dto);
-    }
+	@PostMapping
+	public int insert(@RequestBody ReplyDTO dto) {
+		return service.insert(dto);
+	}
 
-    @GetMapping("/{parent_seq}")
-    public List<ReplyDTO> selectAll(@PathVariable("parent_seq") Long parent_seq) {
-        return service.selectAll(parent_seq);
-    }
+	@GetMapping("/{parent_seq}")
+	public List<ReplyDTO> selectAll(@PathVariable("parent_seq") Long parent_seq) {
+		return service.selectAll(parent_seq);
+	}
 
-    @DeleteMapping("/{seq}")
-    public int delete(@PathVariable("seq") Long seq) {
-        return service.delete(seq);
-    }
+	@DeleteMapping("/{seq}")
+	public int delete(@PathVariable("seq") Long seq) {
+		return service.delete(seq);
+	}
 
-    @PutMapping
-    public int update(@RequestBody ReplyDTO dto) {
-        return service.update(dto);
-    }
+	@PutMapping("/{seq}")
+	public int update(@RequestBody ReplyDTO dto) {
+		return service.update(dto);
+	}
 }
