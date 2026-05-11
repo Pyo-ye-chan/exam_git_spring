@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
 
-	<select id="selectList" resultType="com.study.app.domains.board.BoardDTO">
+	<select id="selectAll" resultType="com.study.app.domains.board.BoardDTO">
 		select * from (select board.*, row_number() over (order by seq desc) as selec from board ) 
 		where selec between #{startNum} and #{endNum} 
 	</select>

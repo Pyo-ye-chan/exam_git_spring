@@ -26,7 +26,10 @@ public class InterceptorConfig implements WebMvcConfigurer{
 				"/member",
                 "/board",
                 "/board/**",
-                "/**/board/**");
+                "/**/board/**",
+                "/reply",
+                "/reply/**",
+                "/**/reply/**");
 
 		
 	}

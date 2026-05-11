@@ -35,8 +35,10 @@ public class TokenValidator implements HandlerInterceptor {
 	            && request.getMethod().equalsIgnoreCase("GET")) {
 	        return true;
 	    }
-	    // 로그인 구현 전: 게시판 GET 요청 허용
-	    if (request.getRequestURI().startsWith("/board")
+
+	    
+	    // 댓글 401 오류 해결
+	    if (request.getRequestURI().startsWith("/reply")
 	            && request.getMethod().equalsIgnoreCase("GET")) {
 	        return true;
 	    }

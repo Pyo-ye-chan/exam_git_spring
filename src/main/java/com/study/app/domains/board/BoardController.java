@@ -11,21 +11,21 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/board/list")
+@RequestMapping("/board")
 public class BoardController {
 	
 	@Autowired
     private BoardService boardService;
 
-    @GetMapping
-    public ResponseEntity<Map<String, Object>>  list(Long cpage) {
+    @GetMapping("/list")
+    public ResponseEntity<Map<String, Object>> list(Long cpage) {
     	
 		int totalCount = boardService.totalCount();
 		
-		System.out.println(cpage);
+		System.out.println("페이지: " + cpage);
 		
-		Long startNum = cpage*10-9;
-		Long endNum = cpage*10;
+		Long startNum = cpage * 10-9;
+		Long endNum = cpage * 10;
 
 		
 		List<BoardDTO> list = boardService.getBoardList(startNum, endNum);
@@ -34,6 +34,8 @@ public class BoardController {
 		
 		resp.put("list", list);
 		resp.put("totalCount", totalCount);
+		
+		System.out.println(list.size());
 		
 		return ResponseEntity.ok(resp);
 		

@@ -27,7 +27,7 @@ public class BoardDAO {
 		return mybatis.selectOne("Board.selectCount");
 	}
 
-	@Transactional
+	
 	public BoardDTO selectBySeq(String seq) {
 		mybatis.update("Board.updateViewCount", seq);
 		return mybatis.selectOne("Board.selectBySeq", seq);

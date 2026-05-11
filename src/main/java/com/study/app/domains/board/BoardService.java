@@ -21,7 +21,7 @@ public class BoardService {
 		return boardDAO.selectCount();
 	}
 
-    @Transactional
+
     public BoardDTO getBoard(String seq) {
         return boardDAO.selectBySeq(seq);
     }
